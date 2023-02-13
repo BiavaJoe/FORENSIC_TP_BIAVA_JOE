@@ -16,7 +16,7 @@ Un outil appelé "photorec" permet de récupérer des fichiers supprimés et de 
 La consultation de deux de ces documents identifie la preuve recherchée lors de cette étape, c'est à dire une photo d'un tableau blanc sur lequel est écrit "bosch{1MAG3}". L'analyse a ainsi permis de récupérer une preuve d'identification.
 Cette récupération a également permis d'identifier dans un fichier .ini un chemin nommé "secret.png" qui pourrait attirer l'attention.
 
-Les fichiers correspondant à la preuve se nomment "f0016520.png" et "f0040392.png".
+Les fichiers correspondant à la preuve se nomment "f0016520.png" et "f0040392.png" et la preuve a été enregistrée dans le dossier "TP01/img" sous le nom flag.png.
 
 Signature :
 JB
