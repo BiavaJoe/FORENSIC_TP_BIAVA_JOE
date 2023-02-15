@@ -35,32 +35,32 @@ Le serveur servant de site web, il est important de croiser les logs avec l'IP d
 
 Parmi toutes les informations listées, il a été possible d'identifier clairement une utilisation frauduleuse de certaines requêtes, celles-ci sont ci-dessous :
 
-![alt text]("img/preuve mdp.png" "Récupération du mot de passe")
+![alt text](img/preuvemdp.png "Récupération du mot de passe")
 
 Ceci nous a permis particulièrement d'identifier une ligne précisément qui indique la commande rentrant le mot de passe dans le fichier "/tmp/mypasswd"
 
-![alt text]("img/passwd.png" "Commande d'ajout du mot de passe dans le fichier")
+![alt text](img/passwd.png "Commande d'ajout du mot de passe dans le fichier")
 
 Grâce au mot de passe récupéré, nous allons pouvoir exploiter le zip présent dans le dossier "/opt/leak"
 
 ###Exploitation des données
 Une fois déplacé dans le dossier où se situe notre zip, le premier point est de vérifier le contenu de ce dernier, afin de s'assurer des types de format de fichier qui le compose :
 
-![alt text]("img/listage zip.png" "Listage du contenu du zip")
+![alt text](img/listagezip.png "Listage du contenu du zip")
 
 On observe la présence d'un fichier "all_tools.txt". Un txt ne représentant pas de menace, nous allons dézipper l'archive dans un dossier dans lequel nous avons l'autorisation d'écrire. Dans la photo ci-dessous, l'utilisation d'unzip ayant déjà été réalisée, nous observons une demande de renommage du dossier d'arrivée. Le contenu du zip atterira donc directement dans le répertoire "/home/b0sch".
 
-![alt text]("img/unzip.png" "Dézippage de l'archive")
+![alt text](img/unzip.png "Dézippage de l'archive")
 
 Nous pouvons maintenant lire le contenu du fichier texte :
 
-![alt text]("img/gg.png" "Contenu du fichier texte")
+![alt text](img/gg.png "Contenu du fichier texte")
 
 
 ###Analyse du crontab
 Afin de vérifier si une potentielle persistance aurait été mise en place par l'attaquant sur le site web, nous allons vérifier le fichier crontab :
 
-![alt text]("img/crontab.png" "Contenu du fichier crontab")
+![alt text](img/crontab.png "Contenu du fichier crontab")
 
 Le "job" est prévu pour s'éxécuter toutes les minutes, et ouvre un shell Bash en redirigeant la sortie vers un socket réseau sur l'adresse IP de l'attaquant, sur le port 4444, et renvoie toute l'entrée depuis le socket réseau vers le shell Bash. Pour traduire en quelques mots, c'est tout simplement une backdoor laissée par l'attaquant pour pouvoir continuer à manipuler à distance le serveur.
 
