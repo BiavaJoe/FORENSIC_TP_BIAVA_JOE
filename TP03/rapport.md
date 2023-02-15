@@ -13,9 +13,9 @@ Différents points vont être abordés :
 ..* L'exploitation des données récupérés par les précédents points
 ..* L'analyse du crontab (planificateur de tâche)
 
-##Résultats
+## Résultats
 
-###Vérification de l'historique
+### Vérification de l'historique
 Dans un premier temps, voici l'historique des commandes lors de la connexion à la machine :
 
 ![alt text](img/history.png "Historique des commandes")
@@ -27,7 +27,7 @@ On y aperçoit plusieurs points intéressants:
 4. Le déplacement du zip dans le dossier "/opt/leak"
 5. La suppression du fichier "/tmp/mypasswd" dans lequel se situe le mot de passe du zip
 
-###Analyse des logs
+### Analyse des logs
 
 Le serveur servant de site web, il est important de croiser les logs avec l'IP distante que nous avons récupérée grâce à la précédente commande. L'outil "grep" a permis d'identifier les requêtes générées par cette IP sur le site :
 
@@ -43,7 +43,7 @@ Ceci nous a permis particulièrement d'identifier une ligne précisément qui in
 
 Grâce au mot de passe récupéré, nous allons pouvoir exploiter le zip présent dans le dossier "/opt/leak"
 
-###Exploitation des données
+### Exploitation des données
 Une fois déplacé dans le dossier où se situe notre zip, le premier point est de vérifier le contenu de ce dernier, afin de s'assurer des types de format de fichier qui le compose :
 
 ![alt text](img/listagezip.png "Listage du contenu du zip")
@@ -57,7 +57,7 @@ Nous pouvons maintenant lire le contenu du fichier texte :
 ![alt text](img/gg.png "Contenu du fichier texte")
 
 
-###Analyse du crontab
+### Analyse du crontab
 Afin de vérifier si une potentielle persistance aurait été mise en place par l'attaquant sur le site web, nous allons vérifier le fichier crontab :
 
 ![alt text](img/crontab.png "Contenu du fichier crontab")
@@ -65,13 +65,13 @@ Afin de vérifier si une potentielle persistance aurait été mise en place par 
 Le "job" est prévu pour s'éxécuter toutes les minutes, et ouvre un shell Bash en redirigeant la sortie vers un socket réseau sur l'adresse IP de l'attaquant, sur le port 4444, et renvoie toute l'entrée depuis le socket réseau vers le shell Bash. Pour traduire en quelques mots, c'est tout simplement une backdoor laissée par l'attaquant pour pouvoir continuer à manipuler à distance le serveur.
 
 
-##Conclusions
+## Conclusions
 Au vu des différents points relevés, nous pouvons identifier qu'une faille est présente sur le site web, et permet d'accéder aux fichiers internes du serveur, par l'intermédiaire de requêtes. Cela a permis à l'attaquant de rentrer sur le serveur, de déposer des données, tout en les sécurisant avec un mot de passe qui a été supprimé sur le serveur. Si les logs apache de ce serveur avaient été supprimés, il aurait été beaucoup plus ardu de retrouver le mot de passe permettant d'exploiter les données déposées. De plus une backdoor a été installée pour permettre à l'attaquant de conserver son emprise sur la machine.
 
-##Recommandations
+## Recommandations
 Afin de ne plus subir ce type d'attaque, il est recommandé de résoudre cete faille web permettant d'injecter du contenu sur la machine, mais également de protéger le traffic arrivant et sortant de ce serveur web. Le port 4444 n'étant pas commun, le bloquer permettrait d'empêcher l'utilisation de la backdoor.
 
-##Conclusion générale
+## Conclusion générale
 Cette attaque réalisée via l'interface web du serveur bosch-cyber consistait en la prise en main du serveur par l'intermédiaire d'une backdoor, et le dépot de données protégées par un mot de passe qui a été effacé sur le serveur.
 Cette analyse a débutée le 15/02/2023 à 09h40 et s'est conclue par la rédaction du présent rapport ce 15/02/2023 à 12h45.
 
