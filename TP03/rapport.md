@@ -4,14 +4,14 @@
 L'environnement utilisé pour cette analyse forensique est constitué d'un machine virtuelle Kali Linux, sur laquelle tourne une image Docker du site web attaqué. Les accès à ce site se font par l'intermédiaire d'une connexion SSH sur le port 2222. L'identifiant et le mot de passe ont été fournis dans le cadre de cette analyse.
 
 ## Introduction
-Le site bosch-cyber a été compromis et les attaquants ont potentiellement dérobé des données. Le site a été mis en maintenance afin de pouvoir analysé ce que l'attaquant a pu exfiltré, et les potentielles conséquences de cette attaque.
+Le site bosch-cyber a été compromis et les attaquants ont potentiellement dérobé des données. Le site a été mis en maintenance afin de pouvoir analyser ce que l'attaquant a pu exfiltrer, et les potentielles conséquences de cette attaque.
 
 ## Méthodologie
 Différents points vont être abordés :
-..* L'historique des commandes
-..* L'analyse des logs
-..* L'exploitation des données récupérés par les précédents points
-..* L'analyse du crontab (planificateur de tâche)
+* L'historique des commandes
+* L'analyse des logs
+* L'exploitation des données récupérées par les précédents points
+* L'analyse du crontab (planificateur de tâches)
 
 ## Résultats
 
@@ -73,7 +73,7 @@ Afin de ne plus subir ce type d'attaque, il est recommandé de résoudre cete fa
 
 ## Conclusion générale
 Cette attaque réalisée via l'interface web du serveur bosch-cyber consistait en la prise en main du serveur par l'intermédiaire d'une backdoor, et le dépot de données protégées par un mot de passe qui a été effacé sur le serveur.
-Cette analyse a débutée le 15/02/2023 à 09h40 et s'est conclue par la rédaction du présent rapport ce 15/02/2023 à 12h45.
+Cette analyse a débuté le 15/02/2023 à 09h40 et s'est conclue par la rédaction du présent rapport ce 15/02/2023 à 12h45.
 
 Réalisé par : Joé BIAVA
 Signature : JB
